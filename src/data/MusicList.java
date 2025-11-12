@@ -36,15 +36,21 @@ public class MusicList {
 	}
 	
 	public ArrayList<Song> getSongsAlphabetically() {
-		return new ArrayList<>(songList);
+		ArrayList<Song> sortedList = new ArrayList<>(songList);
+		SelectionSort.selectionSort(sortedList);
+	    return sortedList;
 	}
 	
 	public ArrayList<Song> getSongsByDateAdded() {
-		return new ArrayList<>(songList);
+		ArrayList<Song> sortedList = new ArrayList<>(songList);
+	    sortedList.sort((s1, s2) -> s1.getDateAdded().compareTo(s2.getDateAdded()));
+	    return sortedList;
 	}
 	
 	public ArrayList<Song> getSongsByDateCreated() {
-		return new ArrayList<>(songList);
+	    ArrayList<Song> sortedList = new ArrayList<>(songList);
+	    sortedList.sort((s1, s2) -> s1.getReleaseDate().compareTo(s2.getReleaseDate()));
+	    return sortedList;
 	}
 	
 	public int size() {

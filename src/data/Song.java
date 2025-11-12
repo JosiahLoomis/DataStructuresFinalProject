@@ -1,6 +1,6 @@
 package data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Song implements Comparable<Song> {
 
@@ -8,9 +8,8 @@ public class Song implements Comparable<Song> {
 	private String artist;
 	private String platform;
 	private String songLink;
-	private Date releaseDate;
-	private Date dateAdded;
-	private Boolean liked;
+	private LocalDate releaseDate;
+	private LocalDate dateAdded;
 	
 	private Boolean priorityQueued;
 	
@@ -20,12 +19,11 @@ public class Song implements Comparable<Song> {
 		this.artist = "";
 		this.platform = "";
 		this.songLink = "";
-		this.releaseDate = new Date();
-		this.dateAdded = new Date();
-		this.liked = false;
+		this.releaseDate = null;
+		this.dateAdded = null;
 	}
 	
-	public Song(String title, String artist, String platform, String songLink, Date releaseDate, Date dateAdded, Boolean liked) {
+	public Song(String title, String artist, String platform, String songLink, LocalDate releaseDate, LocalDate dateAdded) {
 		super();
 		this.title = title;
 		this.artist = artist;
@@ -33,7 +31,6 @@ public class Song implements Comparable<Song> {
 		this.songLink = songLink;
 		this.releaseDate = releaseDate;
 		this.dateAdded = dateAdded;
-		this.liked = liked;
 	}
 
 	/**
@@ -95,45 +92,30 @@ public class Song implements Comparable<Song> {
 	/**
 	 * @return the releaseDate
 	 */
-	public Date getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
 	/**
 	 * @param releaseDate the releaseDate to set
 	 */
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
 	/**
 	 * @return the dateAdded
 	 */
-	public Date getDateAdded() {
+	public LocalDate getDateAdded() {
 		return dateAdded;
 	}
 
 	/**
 	 * @param dateAdded the dateAdded to set
 	 */
-	public void setDateAdded(Date dateAdded) {
+	public void setDateAdded(LocalDate dateAdded) {
 		this.dateAdded = dateAdded;
 	}
-
-	/**
-	 * @return the liked
-	 */
-	public Boolean getLiked() {
-		return liked;
-	}
-
-	/**
-	 * @param liked the liked to set
-	 */
-	public void setLiked(Boolean liked) {
-		this.liked = liked;
-	}
-
 	
 	/**
 	 * @return the priorityQueued
@@ -141,7 +123,6 @@ public class Song implements Comparable<Song> {
 	public Boolean getPriorityQueued() {
 		return priorityQueued;
 	}
-
 	
 	/**
 	 * @param priorityQueued the priorityQueued to set

@@ -2,8 +2,19 @@ package data;
 
 import java.util.ArrayList;
 
+/**
+ * Class for sorting the Music List using a custom selection Sort
+ * 
+ * @author Josiah Loomis
+ * @version 1.0
+ */
 public class SelectionSort {
 
+	/**
+	 * Sorts the given array list.
+	 * 
+	 * @param The array list to sort.
+	 */
 	public static void selectionSort(ArrayList<Song> arr) {
         int n = arr.size();
 

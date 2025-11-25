@@ -1,0 +1,8 @@
+SEQUENCE:7
+Need 2|Pinegrove|YouTube|https://www.youtube.com/watch?v=7T4OEZcnOJE|2017-04-18|2023-11-07|true
+The Less I Know The Better|Tame Imapala|Spotify|https://open.spotify.com/track/6K4t31amVTZDgR3sKmwUJJ?si=7d6d46f627ad48ed|2015-07-17|2024-02-01|true
+The Less I Know The Better|Tame Imapala|Spotify|https://open.spotify.com/track/6K4t31amVTZDgR3sKmwUJJ?si=7d6d46f627ad48ed|2015-07-17|2024-02-01|true
+King Of The Clouds|Panic! At The Disco|YouTube|https://www.youtube.com/watch?v=6i7hIUegbQs|2018-06-18|2023-08-17|false
+Stockholm Syndrome|Muse|YouTube|https://www.youtube.com/watch?v=gXN9acC9edU|2010-02-08|2023-04-02|true
+Stockholm Syndrome|Muse|YouTube|https://www.youtube.com/watch?v=gXN9acC9edU|2010-02-08|2023-04-02|false
+Stockholm Syndrome|Muse|YouTube|https://www.youtube.com/watch?v=gXN9acC9edU|2010-02-08|2023-04-02|false

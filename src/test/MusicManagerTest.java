@@ -10,6 +10,7 @@ import data.*;
 
 public class MusicManagerTest {
 
+	// ==================== TEST SET UP ====================
 	private Song song1;
     private Song song2;
     private Song song3;
@@ -38,9 +39,8 @@ public class MusicManagerTest {
         song4 = new Song("Another Song", "Artist", "Spotify",
                 "spotify.com/song4", date4, date4);
     }
-
+    
     // ==================== SONG CLASS TESTS ====================
-
     @Test
     public void testSongDefaultConstructor() {
         Song song = new Song();
@@ -91,13 +91,18 @@ public class MusicManagerTest {
 
     @Test
     public void testSongCompareTo() {
-        song1.setPriorityQueued(true);
+    	song1.setPriorityQueued(true);
+        song1.setQueueSequence(0);
+        
         song2.setPriorityQueued(false);
+        song2.setQueueSequence(1);
 
         assertTrue(song1.compareTo(song2) < 0);
         assertTrue(song2.compareTo(song1) > 0);
 
         song3.setPriorityQueued(true);
+        song3.setQueueSequence(0);
+        
         assertEquals(0, song1.compareTo(song3));
     }
 
@@ -140,10 +145,10 @@ public class MusicManagerTest {
 
         ArrayList<Song> sorted = list.getSongsByDateAdded();
 
-        assertEquals(song3, sorted.get(0)); // dateAdded = date1
-        assertEquals(song1, sorted.get(1)); // dateAdded = date2
-        assertEquals(song2, sorted.get(2)); // dateAdded = date3
-        assertEquals(song4, sorted.get(3)); // dateAdded = date4
+        assertEquals(song3, sorted.get(0));
+        assertEquals(song1, sorted.get(1));
+        assertEquals(song2, sorted.get(2));
+        assertEquals(song4, sorted.get(3));
     }
 
     @Test
@@ -170,4 +175,114 @@ public class MusicManagerTest {
         assertTrue(list.getSongsByDateAdded().isEmpty());
         assertTrue(list.getSongsByDateCreated().isEmpty());
     }
+    
+    @Test
+	public void testMusicListSearchSongs() {
+	    MusicList list = new MusicList();
+	    list.addSong(song1);
+	    list.addSong(song2);
+	    list.addSong(song3);
+	    list.addSong(song4);
+	    
+	    ArrayList<Song> results = list.searchSongs("Queen");
+	    assertEquals(1, results.size());
+	    assertEquals("Bohemian Rhapsody", results.get(0).getTitle());
+	    
+	    results = list.searchSongs("Spotify");
+	    assertEquals(2, results.size());
+	}
+	
+	@Test
+	public void testMusicListRemoveSong() {
+	    MusicList list = new MusicList();
+	    list.addSong(song1);
+	    list.addSong(song2);
+	    
+	    assertTrue(list.removeSong(song1));
+	    assertEquals(1, list.size());
+	    assertFalse(list.contains(song1));
+	}
+    
+ // ==================== MUSIC QUEUE TESTS ====================
+	@Test
+	public void testMusicQueueEnqueueAndDequeue() {
+	    MusicQueue queue = new MusicQueue();
+	    queue.enqueue(song1, false);
+	    queue.enqueue(song2, false);
+	    
+	    assertEquals(2, queue.size());
+	    
+	    Song first = queue.dequeue();
+	    Song second = queue.dequeue();
+	    
+	    assertEquals("Bohemian Rhapsody", first.getTitle());
+	    assertEquals("Stairway to Heaven", second.getTitle());
+	    assertTrue(queue.isEmpty());
+	}
+	
+	@Test
+	public void testMusicQueuePriorityOrdering() {
+	    MusicQueue queue = new MusicQueue();
+	    
+	    // Add normal songs
+	    queue.enqueue(song1, false);
+	    queue.enqueue(song2, false);
+	    
+	    queue.enqueue(song3, true);
+	    
+	    Song first = queue.dequeue();
+	    Song second = queue.dequeue();
+	    Song third = queue.dequeue();
+	    
+	    assertEquals("Hotel California", first.getTitle());
+	    assertEquals("Bohemian Rhapsody", second.getTitle());
+	    assertEquals("Stairway to Heaven", third.getTitle());
+	}
+	
+	@Test
+	public void testMusicQueueFIFOWithinPriority() {
+	    MusicQueue queue = new MusicQueue();
+	    
+	    queue.enqueue(song1, true);
+	    queue.enqueue(song2, true);
+	    queue.enqueue(song3, true);
+	    
+	    Song first = queue.dequeue();
+	    Song second = queue.dequeue();
+	    Song third = queue.dequeue();
+	    
+	    assertEquals("Bohemian Rhapsody", first.getTitle());
+	    assertEquals("Stairway to Heaven", second.getTitle());
+	    assertEquals("Hotel California", third.getTitle());
+	}
+	
+	@Test
+	public void testMusicQueueGetAllSongs() {
+	    MusicQueue queue = new MusicQueue();
+	    queue.enqueue(song1, true);
+	    queue.enqueue(song2, false);
+	    queue.enqueue(song3, true);
+	    
+	    ArrayList<Song> allSongs = queue.getAllSongs();
+	    
+	    assertEquals(3, allSongs.size());
+	    
+	    assertTrue(allSongs.get(0).getPriorityQueued());
+	    assertTrue(allSongs.get(1).getPriorityQueued());
+	    assertFalse(allSongs.get(2).getPriorityQueued());
+	}
+	
+	@Test
+	public void testMusicQueueCloningSongs() {
+	    MusicQueue queue = new MusicQueue();
+	    
+	    queue.enqueue(song1, true);
+	    queue.enqueue(song1, false);
+	    
+	    Song first = queue.dequeue();
+	    Song second = queue.dequeue();
+	    
+	    assertTrue(first.getPriorityQueued());
+	    assertFalse(second.getPriorityQueued());
+	}
 }

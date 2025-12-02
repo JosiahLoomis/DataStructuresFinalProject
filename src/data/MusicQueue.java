@@ -80,6 +80,12 @@ public class MusicQueue {
 		 return pq.size();
 	 }
 	 
+	 /**
+	  * Returns all songs currently in the queue without removing them.
+	  * Songs are returned in priority order (priority songs first, then by insertion order).
+	  * 
+	  * @return an ArrayList of songs in priority order
+	  */
 	 public ArrayList<Song> getAllSongs() {
 		 ArrayList<Song> songs = new ArrayList<>();
 			

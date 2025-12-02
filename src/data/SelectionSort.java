@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class SelectionSort {
 
 	/**
-	 * Sorts the given array list.
-	 * 
-	 * @param The array list to sort.
+	 * Sorts the given array list alphabetically by song title using selection sort algorithm.
+	 * Modifies the list in place.
+	 *
+	 * @param arr the ArrayList of songs to sort
 	 */
 	public static void selectionSort(ArrayList<Song> arr) {
         int n = arr.size();
